@@ -3,9 +3,10 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="customProperties.css">
-    <link rel="stylesheet" href="navigation_menu.css">
-    <link rel="stylesheet" href="disposition.css">
     <link rel="stylesheet" href="grid.css">
+    <link rel="stylesheet" href="disposition.css">
+    <link rel="stylesheet" href="navigation_menu.css">
+    <link rel="stylesheet" href="side.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
 </head>
@@ -89,13 +90,34 @@
         <div class="wrapper">
             <div class="grid11">
                 <div class="streamerContent">
-                    <a><span class="streamer_name">FM player</span><span>streaming title name</span></a>                   
-                    <a>Streamers >></a>
+                    <a><strong class="streamerName">FM player</strong><span class="streamTitle">streaming title name</span></a> 
+                    <a><strong class="streamerName">GM player2</strong><span class="streamTitle">streaming title name</span></a>                    
+                    <a class="hookStreamerPage">Streamers »</a>
                 </div>
                 <div class="scheduledTournament">
-                    <div>Tournament 1 blitz</div>
-                    <div>Tournament rapid</div>
-                    <div>Super blitz Tournament</div>
+                    <div class="tournamentButton">
+                        <i icon=""></i>
+                        <div class="content">
+                            <span class="name">NIC Classic: Prelims, Day 2</span>
+                            <span class="headline">Magnus, Naka, Firouzja...</span>
+                            <span class="more"><span class="numberPlayer"></span><span class="timeUntilEnd">Parties en cours</span>
+                        </div>
+                    </div>
+                    <div class="tournamentButton">
+                        <i icon="5"></i>
+                        <div class="content">
+                            <span class="name">Arène du Bouclier Three-check</span>
+                            <span class="headline">Battle for the Three-check Shield</span>
+                            <span class="more"><span class="numberPlayer">250 joueurs</span><span> • </span><span class="timeUntilEnd"></span>
+                        </div>
+                    </div>
+                    <div class="tournamentButton">
+                        <i icon="T"></i>
+                        <div class="content">
+                            <span class="name">Arène d'Élite Bullet</span>
+                            <span class="more"><span class="numberPlayer">167 joueurs</span><span> • </span><span class="timeUntilEnd">Parties en cours</span>
+                        </div>
+                    </div>
                 </div>
                 <div class="notification">
                     <ul>
