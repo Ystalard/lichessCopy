@@ -1,0 +1,74 @@
+.ddl-button {
+    display: flex;
+    border-left: 3px solid transparent;
+    height: 100%;
+}
+
+.ddl-button span {
+    margin: auto;
+    margin-right: 10px;
+    margin-left: 10px;
+    text-shadow: 0 1px 0 #fff;
+    font-size: 14px;
+    color: #5e5e5e;
+    text-transform: uppercase;
+}
+
+.ddl-container {
+    position: relative;
+    cursor: pointer;
+}
+
+.ddl-container:hover .ddl-button {
+    border-left: 3px solid #3286d5;
+    background-color: white;
+}
+
+.ddl-list {
+    display: none;
+}
+
+.ddl-list div:first-child {
+    border-top-right-radius: 5px;
+}
+
+.ddl-list div:last-child {
+    border-bottom-right-radius: 5px;
+}
+
+.ddl-list div {
+    padding: 10px;
+    min-width: 140px;
+    font-size: 14px;
+    color: #5e5e5e;
+}
+
+.ddl-container:hover .ddl-list{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    border-left: 3px solid #3286d5;
+    background-color: white;
+    z-index: 1;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    text-transform: capitalize;
+}
+
+.ddl-container:hover .ddl-list div:hover {
+    background-color: #3286d5;
+    color: white;
+}
+
+.lichessOrg {
+    font-size: 25px;
+    text-shadow: 0 1px 0 #fff;
+}
+
+.lichessOrg span {
+    color: #4d4d4d;
+}
+
+.lichessOrg a {
+    color: #787878;
+}
