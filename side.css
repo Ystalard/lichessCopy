@@ -40,6 +40,10 @@
     color: var(--color-blue);
 }
 
+.scheduledTournament .tournamentButton:last-child{
+    box-shadow: 0px 1px 1px 0 rgb(0 0 0 / 40%);
+}
+
 .tournamentButton {
     background: linear-gradient(to bottom, #d1e4f6 0%, #c5d8e9 100%);
     cursor: pointer;
