@@ -23,3 +23,27 @@ i {
     font-family: "lichess";
     font-style: normal;
 }
+
+i::before {
+    content: attr(icon);
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: white; 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #d4c8c8; 
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #a29a9a;; 
+  }
