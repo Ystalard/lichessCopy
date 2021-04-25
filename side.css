@@ -81,3 +81,7 @@
 .tournamentButton i:before {
     content: attr(icon);
 }
+
+.numberPlayer:after{
+    content: " • ";
+}
