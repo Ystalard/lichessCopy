@@ -1,4 +1,25 @@
 :root{
     --font-family-1:'Noto Sans', Sans-Serif;
     --font-family-2:'Roboto', Sans-Serif;
+    --color-gold-streamer:#d59020;
+    --color-gray: #5e5e5e;
+    --color-light-gray:#787878;
+    --color-strong-gray: #4d4d4d;
+    --color-blue: #3286d5;
+    --font-size-1: 14px;
+    --font-size-0: 12.6px;
+    --font-size-2: 11.9px;
+}
+
+@font-face {
+    font-family: 'lichess';
+    src: url('https://lichess1.org/assets/_qFOQpH/font/lichess.woff2') format('woff2');
+    font-display: block;
+    font-weight: normal;
+    font-style: normal;
+  }
+
+i {
+    font-family: "lichess";
+    font-style: normal;
 }

@@ -3,7 +3,7 @@
 }
 
 html {
-    font-family: 'Noto Sans', Sans-Serif;
+    font-family: var(--font-family-1);
 }
 
 body {
@@ -21,7 +21,7 @@ body {
     margin-bottom: 15px;
     padding: 15px;
     text-align: center;
-    font-family: 'Roboto', Sans-Serif;
+    font-family: var(--font-family-2);
     color: #787878;
     font-size: 15.4px;
     box-shadow: 0 2px 5px 0 rgb(0 0 0 / 23%);
@@ -38,7 +38,7 @@ body {
 
 .horizontal-menu-main {
     display: flex;
-    font-family: 'Roboto', Sans-Serif;
+    font-family: var(--font-family-2);
     font-size: 14px;
     color: #5e5e5e;
 }
@@ -76,12 +76,12 @@ body {
 
 #quick-start-grid > div .clock {
     font-size: 2em;
-    font-family: 'Roboto', sans-serif;
+    font-family: var(--font-family-2);
     letter-spacing: .1em;
 }
 
 #quick-start-grid > div .type{
-    font-family: 'Roboto', Sans-Serif;
+    font-family: var(--font-family-2);
 }
 
 .grid14 {
@@ -107,8 +107,4 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
-}
-
-.streamersName{
-    color: #d59020;
 }
