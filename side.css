@@ -27,7 +27,7 @@
     margin-left: 5px;
 }
 
-.hookPage {
+.grid11 .hookPage {
     /* this class must be in a flexbox*/
     text-align: right;
     font-family: var(--font-family-2);
@@ -36,12 +36,12 @@
     cursor: pointer;
 }
 
-.hookPage:hover {
+.grid11 .hookPage:hover {
     color: var(--color-blue);
 }
 
-.scheduledTournament .tournamentButton:last-child{
-    box-shadow: 0px 1px 1px 0 rgb(0 0 0 / 40%);
+.scheduledTournament {
+    box-shadow: var(--box-shadow);
 }
 
 .tournamentButton {
@@ -123,10 +123,10 @@
     font-size: var(--font-size-0);
 }
 
-.notificationTitle i{
+/* .notificationTitle i{
     padding-left: 5px;
     padding-right: 5px;
-}
+} */
 
 .notificationTitle:hover {
     color: var(--color-blue);
