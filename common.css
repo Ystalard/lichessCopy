@@ -1,0 +1,32 @@
+body {
+    color:var(--color-strong-gray);
+}
+
+.playerName {
+    font-weight: bold;
+    font-size: var(--font-size-1);
+    cursor: pointer;
+    color:var(--color-light-gray);
+    box-sizing: content-box;
+    display: inline-block;
+}
+
+.playerName:hover .player {
+    color:var(--color-blue);
+}
+
+.playerName span:not(.player){
+    color:var(--color-gold-streamer);
+}
+
+.playerName span:not(:empty) + span{
+    margin-left: 5px;
+}
+
+.greenColor {
+    color: var(--color-green) !important;
+}
+
+.redColor {
+    color:var(--color-red) !important;
+}

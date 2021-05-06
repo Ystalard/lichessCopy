@@ -1,0 +1,71 @@
+.overview {
+    display:  flex;
+    flex-direction: column;
+    box-shadow: var(--box-shadow);
+    border-radius: var(--border-radius-common);
+}
+
+.overviewHead {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 10px;
+    background: var(--light-linear-gradient);
+    text-shadow: var(--shadow-text);
+    font-size: var(--font-size-1);
+    color:var(--color-light-gray);
+    border-bottom: solid 1px;
+    border-top-right-radius: var(--border-radius-common);
+    border-top-left-radius: var(--border-radius-common);
+}
+
+.overviewTitle {
+    font-weight: bold;
+}
+
+.overviewContent > table {
+    width: 100%;
+    border-collapse: collapse;
+    white-space: nowrap;
+}
+
+.overviewContent > table td {
+    padding: 5px;
+}
+
+.overviewContent > table tr:last-of-type > td {
+    border-bottom-left-radius: var(--border-radius-common);
+}
+
+.overviewContent > table tr:last-of-type td:last-of-type {
+    border-bottom-right-radius: var(--border-radius-common);
+}
+
+.overviewContent > table tr:nth-child(even) {
+    background-color: var(--color-tr-even);
+}
+
+.hookPage {
+    cursor: pointer;
+}
+
+.hookPage:hover {
+    color: var(--color-blue);
+}
+
+.grid23 table tr td:last-of-type{
+    text-align: right;
+}
+
+/* .grid23 table tr td:last-of-type:hover{
+    color: var(--color-strong-blue);
+} */
+
+.tournamentName{
+    display: inline-block;
+    color:var(--color-light-blue);
+}
+
+.tournamentName:hover{
+    color: var(--color-strong-blue);
+}
