@@ -1,18 +1,25 @@
 :root{
     --font-family-1:'Noto Sans', Sans-Serif;
     --font-family-2:'Roboto', Sans-Serif;
+    --color-tr-even: #f7f6f5;
+    --color-green:#629924;
+    --color-endTimer:#d64f00;
+    --color-red:#c33;
     --color-gold-streamer:#d59020;
     --color-gray: #5e5e5e;
     --color-light-gray:#787878;
     --color-strong-gray: #4d4d4d;
     --color-blue: #3286d5;
+    --color-light-blue: #1B78d0;
+    --color-strong-blue:#0269c9;
     --font-size-1: 14px;
     --font-size-0: 12.6px;
     --font-size-2: 11.9px;
     --light-linear-gradient: linear-gradient(to bottom, #f5f5f5 0%, #ededed 100%);
     --blue-linear-gradient: linear-gradient(to bottom, #d1e4f6 0%, #c5d8e9 100%);
-    --shadow-box: 0 1px 0 #fff;
-    --border-radius-common:3px;
+    --shadow-text: 0 1px 0 #fff;
+    --border-radius-common:5px;
+    --box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 20%), 0 1px 5px 0 rgb(0 0 0 / 12%);
 }
 
 @font-face {
@@ -26,6 +33,7 @@
 i {
     font-family: "lichess";
     font-style: normal;
+    padding:5px;
 }
 
 i::before {
