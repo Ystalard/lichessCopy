@@ -1,5 +1,5 @@
 .grid11 > * + *{
- padding-top: 10px;
+ margin-top: 10px;
 }
 
 .streamerContent {
@@ -45,7 +45,7 @@
 }
 
 .tournamentButton {
-    background: linear-gradient(to bottom, #d1e4f6 0%, #c5d8e9 100%);
+    background: var(--blue-linear-gradient);
     cursor: pointer;
     display: flex;
     flex-direction: row;
@@ -96,6 +96,14 @@
     flex-direction: column;
     max-height: 200px;
     overflow-y: scroll;
+}
+
+.lastNotifications div {
+    margin-right: 10px;
+}
+
+.lastNotifications a {
+    margin-right: 10px;
 }
 
 .notification {
