@@ -72,3 +72,13 @@
 .lichessOrg a {
     color: #787878;
 }
+
+.horizontal-icon-menu div {
+    cursor: pointer;
+    padding: 7px;
+    font-size: 1.1rem;    
+}
+
+.horizontal-icon-menu div:hover {
+    color:black;
+}
