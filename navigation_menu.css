@@ -10,7 +10,7 @@
     margin-left: 10px;
     text-shadow: 0 1px 0 #fff;
     font-size: 14px;
-    color: #5e5e5e;
+    color: var(--color-gray);
     text-transform: uppercase;
 }
 
@@ -32,15 +32,23 @@
     border-top-right-radius: 5px;
 }
 
+.horizontal-icon-menu .ddl-list div:first-child {
+    border-top-right-radius: 0px;
+}
+
 .ddl-list div:last-child {
     border-bottom-right-radius: 5px;
+}
+
+.horizontal-icon-menu .ddl-list div:last-child {
+    border-bottom-right-radius: 0px;
 }
 
 .ddl-list div {
     padding: 10px;
     min-width: 140px;
     font-size: 14px;
-    color: #5e5e5e;
+    color: var(--color-gray);
 }
 
 .ddl-container:hover .ddl-list{
@@ -55,7 +63,7 @@
     text-transform: capitalize;
 }
 
-.ddl-container:hover .ddl-list div:hover {
+.horizontal-ddl-menu .ddl-container:hover .ddl-list div:hover {
     background-color: var(--color-blue);
     color: white;
 }
@@ -73,12 +81,35 @@
     color: #787878;
 }
 
-.horizontal-icon-menu div {
+.horizontal-icon-menu .ddl-container > div {
     cursor: pointer;
-    padding: 7px;
+    border: solid 3px transparent;
     font-size: 1.1rem;    
 }
 
-.horizontal-icon-menu div:hover {
+.horizontal-icon-menu .ddl-container > div:hover {
     color:black;
+}
+
+.horizontal-icon-menu .ddl-container:hover .ddl-list {
+    right: 0;
+    border-left: 0px;
+    background-color: white;
+    z-index: 1;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    text-transform: capitalize;
+}
+
+.horizontal-icon-menu .ddl-container:hover > div {
+    background-color: white;
+}
+.horizontal-icon-menu .ddl-container:hover .ddl-list div div:hover {
+    background-color: var(--color-green);
+    color: white;
+}
+
+.solid-border-bottom {
+    border-bottom: solid 1px var(--color-gray);
+    padding: 0px !important;
 }
