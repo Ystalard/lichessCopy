@@ -46,21 +46,32 @@ body {
    flex:1;
    text-align: center;
    cursor: pointer;
+   --after-height: var(--height-after);
 }
 
 .horizontal-menu-main span:after{
     content: "";
     display: block;
     margin: auto;
-    height: 3px;
+    height: var(--height-after);
     width: 0;
     background: transparent;
-    transition: width .5s ease,background-color .5s ease;
+    border-top: solid var(--border-height-after) transparent;
+    border-radius: 0px;
+    transition: width .5s ease, background-color .5s ease, border-radius .7s .2s;
+}
+
+.horizontal-menu-main span:first-of-type:hover:after{
+    border-top-left-radius: 15px;
+}
+
+.horizontal-menu-main span:last-of-type:hover:after{
+    border-top-right-radius: 15px;
 }
 
 .horizontal-menu-main span:hover:after{
     width: 100%;
-    background-color:#d47640;
+    border-top: solid var(--border-height-after) #d47640;
 }
 
 .horizontal-menu-main span:active{

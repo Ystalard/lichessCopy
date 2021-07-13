@@ -158,6 +158,7 @@
 
 
 #quick-start-grid {
+    bottom: calc(var(--border-height-after) + var(--height-after));
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-gap: 15px;

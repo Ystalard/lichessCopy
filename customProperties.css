@@ -20,6 +20,8 @@
     --shadow-text: 0 1px 0 #fff;
     --border-radius-common:5px;
     --box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 20%), 0 1px 5px 0 rgb(0 0 0 / 12%);
+    --border-height-after: 3px; /* also defined in ::after{} just below */
+    --height-after: 30px;  /* also defined in ::after{} just below */
 }
 
 @font-face {
@@ -40,6 +42,10 @@ i::before {
     content: attr(icon);
 }
 
+::after{
+    --border-height-after: 3px;
+    --height-after: 30px;
+}
 /* scrollbar properties */
 /* width */
 ::-webkit-scrollbar {
