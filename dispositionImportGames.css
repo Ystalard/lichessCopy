@@ -1,0 +1,21 @@
+html,main,body{
+    height:100%
+} 
+
+.grid1 {
+    grid-area: button1;
+}
+
+.grid2 {
+    grid-area: button2;
+}
+
+.wrapper{
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    display: grid;
+    grid-template-areas: 
+    ". button1 ."
+    ". button2 .";
+}
