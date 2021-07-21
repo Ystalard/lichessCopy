@@ -63,5 +63,5 @@ body {
     background-image: url(./img/board_brown.svg);
     background-repeat: no-repeat;
     background-position: center;
-    height:calc(8*50px);
+    height:calc(8*25px);
 }

@@ -1,3 +1,39 @@
 html,main,body{
     height:100%
 } 
+
+.nav {
+    grid-area: nav;
+    background-color: aliceblue;
+    height: 50px;
+}
+
+.sampleFromYourGames{
+    grid-area: sampleChess;
+    background-color:darkgreen;
+}
+
+.mainDisplayer{
+    grid-area: main;
+    background-color: black;
+    
+}
+
+.analysis {
+    grid-area: analysis;
+    background-color: blueviolet;
+   
+
+.notes {
+    grid-area: notes;
+    background-color:coral;
+    
+}
+
+.wrapper {
+    display:grid;
+    grid-template-areas:
+    "nav nav nav"
+    "sampleChess main analysis"
+    "sampleChess notes notes";
+}
