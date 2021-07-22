@@ -177,7 +177,7 @@
 
 #quick-start-grid::after {
     content:"";
-    background-image: url(./img/lichess-pad4.svg);
+    background-image: url(../img/lichess-pad4.svg);
     background-color: white;
     opacity: 0.5;
     position: absolute;

@@ -54,13 +54,13 @@ body {
 }
 
 .board {
-    background-image: url(./img/board_brown.svg);
+    background-image: url(../img/board_brown.svg);
     background-repeat: no-repeat;
     background-position: center;
 }
 
 .smallBoard {
-    background-image: url(./img/board_brown.svg);
+    background-image: url(../img/board_brown.svg);
     background-repeat: no-repeat;
     background-position: center;
     height:calc(8*25px);

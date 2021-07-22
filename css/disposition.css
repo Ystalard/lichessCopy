@@ -112,3 +112,8 @@ body {
     flex-direction: column;
     justify-content: center;
 }
+
+.board{
+    height: 296px;
+    width:296px;
+}

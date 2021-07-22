@@ -16,13 +16,15 @@ html,main,body{
 .mainDisplayer{
     grid-area: main;
     background-color: black;
-    
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .analysis {
     grid-area: analysis;
     background-color: blueviolet;
-   
+}
 
 .notes {
     grid-area: notes;
