@@ -1,5 +1,6 @@
 .a8{
     grid-area: a8;
+    
 }
 
 .a7{
@@ -337,7 +338,6 @@
     background-repeat: no-repeat;
     background-position: center;
     color: white;
-    z-index: 1;
 }
 
 .whiteBishop {
@@ -419,26 +419,3 @@
     color: black;
 }
 
-.redBackground {
-    background-color: red;
-    opacity: .5;
-}
-
-.blueBackground {
-    background-color: blue;
-    opacity: .5;
-}
-
-.greenBackground {
-    background-color: green;
-    opacity: .5;
-}
-
-.yellowBackground{
-    background-color: yellow;
-    opacity: .5;
-}
-
-.rotated{
-    transform: rotate(180deg);
-}
