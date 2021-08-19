@@ -32,22 +32,21 @@ function dataToDrag(ev) {
     })
 }
 
-function translatePiece(initPosition,finalPosition,timerange){
+function animateGrid(timerange){
     const grid = document.querySelector(".board");
-    const piece = document.querySelector("." + CSS.escape(initPosition));
+    
     if(timerange === undefined || !Number.isInteger(timerange)) {
-        animateCSSGrid.wrapGrid(grid);
+        const { unwrapGrid, forceGridAnimation } = animateCSSGrid.wrapGrid(grid);
     }
     else{
-        animateCSSGrid.wrapGrid(grid,{duration: timerange});
+        const { unwrapGrid, forceGridAnimation } = animateCSSGrid.wrapGrid(grid,{duration: timerange});
     }    
-    
-    $("button").click(function(){
-        piece.classList.remove(CSS.escape(initPosition));
-        piece.classList.add(CSS.escape(finalPosition));
-    })
 }
 
 $(function() {
-    translatePiece('a1','b7',600);    
+    $("#movePiece").click(function(){
+        const board = document.querySelector("#thisBoard")
+        animateBoard(board,700,'a1','b7')
+    })   
 })
+
