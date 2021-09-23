@@ -444,3 +444,7 @@
 .rotated{
     transform: rotate(180deg);
 }
+
+.rotated piece{
+    transform: rotate(180deg);
+}
