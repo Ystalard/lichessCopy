@@ -2,11 +2,10 @@ function switchBoardOrientation(board){
     board.classList.toggle('rotated')
 }
 
-function getNormalizedSquarePosition(event){
+function getNormalizedBoardPosition(event){
     const board = event.path.find(element => element.classList.contains("board"))
     const height = board.clientHeight
     const width =  board.clientWidth
-
     var offsetXFromBoard
     var offsetYFromBoard
     
@@ -20,53 +19,19 @@ function getNormalizedSquarePosition(event){
             offsetYFromBoard = event.path[0].offsetTop - board.offsetTop + event.path[0].clientHeight/2
         }     
         else if(board.classList.contains("rotated")){
-            offsetXFromBoard = event.offsetX + event.path[0].offsetLeft
-            offsetYFromBoard = event.offsetY + event.path[0].offsetTop  
+            offsetXFromBoard =  event.path[0].offsetLeft - board.offsetLeft + event.path[0].clientWidth/2
+            offsetYFromBoard = event.path[0].offsetTop - 7*height/8 - board.offsetTop + event.path[0].clientHeight/2
         } 
     }
-    else{
+    else {
         offsetXFromBoard = event.offsetX + event.path[0].offsetLeft
-        offsetYFromBoard = event.offsetY + event.path[0].offsetTop 
+        offsetYFromBoard = event.offsetY + event.path[0].offsetTop         
     }
-
+    
     var normalizedX = Math.trunc((offsetXFromBoard*8)/width)
     var normalizedY = Math.trunc((offsetYFromBoard*8)/height)
 
     return {normalizedX,normalizedY}
-}
-
-function getNormalizedBoardPosition(event){
-    const board = event.path.find(element => element.classList.contains("board"))
-    if(!board === undefined){
-        const height = board.clientHeight
-        const width =  board.clientWidth
-        var offsetXFromBoard
-        var offsetYFromBoard
-        
-        if (event.path[0].classList.contains("board")){
-            offsetXFromBoard = event.offsetX
-            offsetYFromBoard = event.offsetY
-        }
-        else if(event.path[0].localName == "piece" && event.path[0].style.position == "fixed" ){
-            if (!board.classList.contains("rotated")){
-                offsetXFromBoard = event.path[0].offsetLeft - board.offsetLeft + event.path[0].clientWidth/2
-                offsetYFromBoard = event.path[0].offsetTop - board.offsetTop + event.path[0].clientHeight/2
-            }     
-            else if(board.classList.contains("rotated")){
-                offsetXFromBoard =  event.path[0].offsetLeft - board.offsetLeft + event.path[0].clientWidth/2
-                offsetYFromBoard = event.path[0].offsetTop - 7*height/8 - board.offsetTop + event.path[0].clientHeight/2
-            } 
-        }
-        else {
-            offsetXFromBoard = event.offsetX + event.path[0].offsetLeft
-            offsetYFromBoard = event.offsetY + event.path[0].offsetTop         
-        }
-        
-        var normalizedX = Math.trunc((offsetXFromBoard*8)/width)
-        var normalizedY = Math.trunc((offsetYFromBoard*8)/height)
-        return {normalizedX,normalizedY}
-    }
-    return {undefined,undefined}
 }
 
 function getNormalizedVectorTranslation(initialVector,finalVector){
