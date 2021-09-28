@@ -1,45 +1,111 @@
+// uci protocol: http://wbec-ridderkerk.nl/html/UCIProtocol.html
 function switchBoardOrientation(board){
     board.classList.toggle('rotated')
 }
 
-function getNormalizedSquarePosition(event){
-    const board = event.path.find(element => element.classList.contains("board"))
-    const height = board.clientHeight
-    const width =  board.clientWidth
-
-    var offsetXFromBoard
-    var offsetYFromBoard
+function setPositionOnBoard(fenstring,board){
+    const fieldArray = fenstring.split(' ')
+    const rows = fieldArray[0].split('/')
+    var rowCount = 8
+    rows.forEach(row => {
+        for (let index = 0; index < row.length; index++) {
+            const character = row.charAt(index)
+            if (!isNaN(character * 1)){
+            }else{
+                if (character == character.toUpperCase() || character == character.toLowerCase()) {
+                    var type
+                    switch(character){
+                        case "P": type = "whitePawn"
+                        break;
+                        case "N": type = "whiteKnight"
+                        break;
+                        case "B": type = "whiteBishop"
+                        break;
+                        case "Q": type = "whiteQueen"
+                        break;
+                        case "K": type = "whiteKing"
+                        break;
+                        case "R": type = "whiteRook"
+                        break;
+                        case "p": type = "blackPawn"
+                        break;
+                        case "n": type = "blackKnight"
+                        break;
+                        case "b": type = "blackBishop"
+                        break;
+                        case "q": type = "blackQueen"
+                        break;
+                        case "k": type = "blackKing"
+                        break;
+                        case "r": type = "blackRook"
+                        break;
+                    }
+                    const list = [type,String.fromCharCode(97 + index) + rowCount]
+                    setElementOfBoardWithClassNames(board,"piece",list)
+                }
+            }
+        }
+        --rowCount
+    });
     
-    if (event.path[0].classList.contains("board")){
-        offsetXFromBoard = event.offsetX
-        offsetYFromBoard = event.offsetY
-    }
-    else if(event.path[0].localName == "piece" && event.path[0].style.position == "fixed" ){
-        if (!board.classList.contains("rotated")){
-            offsetXFromBoard = event.path[0].offsetLeft - board.offsetLeft + event.path[0].clientWidth/2
-            offsetYFromBoard = event.path[0].offsetTop - board.offsetTop + event.path[0].clientHeight/2
-        }     
-        else if(board.classList.contains("rotated")){
-            offsetXFromBoard = event.offsetX + event.path[0].offsetLeft
-            offsetYFromBoard = event.offsetY + event.path[0].offsetTop  
-        } 
-    }
-    else{
-        offsetXFromBoard = event.offsetX + event.path[0].offsetLeft
-        offsetYFromBoard = event.offsetY + event.path[0].offsetTop 
-    }
-
-    var normalizedX = Math.trunc((offsetXFromBoard*8)/width)
-    var normalizedY = Math.trunc((offsetYFromBoard*8)/height)
-
-    return {normalizedX,normalizedY}
 }
 
-function getNormalizedBoardPosition(event){
-    const board = event.path.find(element => element.classList.contains("board"))
-    if(!board === undefined){
+function isOutsideBoard(classNamePosition){
+    var isOutsideBoard = true
+    switch(classNamePosition.charAt(0)){
+        case "a": isOutsideBoard = false
+        break;
+        case "b": isOutsideBoard = false
+        break;
+        case "c": isOutsideBoard = false
+        break;
+        case "d": isOutsideBoard = false
+        break;
+        case "e": isOutsideBoard = false
+        break;
+        case "f": isOutsideBoard = false
+        break;
+        case "g": isOutsideBoard = false
+        break;
+        case "h": isOutsideBoard = false
+        break;
+        default: isOutsideBoard = true
+        break;
+    }
+    if(!isOutsideBoard){
+        switch(classNamePosition.charAt(1)){
+            case "1": isOutsideBoard = false
+            break;
+            case "2": isOutsideBoard = false
+            break;
+            case "3": isOutsideBoard = false
+            break;
+            case "4": isOutsideBoard = false
+            break;
+            case "5": isOutsideBoard = false
+            break;
+            case "6": isOutsideBoard = false
+            break;
+            case "7": isOutsideBoard = false
+            break;
+            case "8": isOutsideBoard = false
+            break;
+            default: isOutsideBoard = true
+            break;
+        }
+    }
+    return classNamePosition.length = 2 && isOutsideBoard
+}
+
+function getNormalizedSquarePosition(event){
+    const board = event.path.find(element => element.classList !== undefined && element.classList.contains("board"))
+    var normalizedX = undefined 
+    var normalizedY = undefined
+    
+    if(board !== undefined){
         const height = board.clientHeight
         const width =  board.clientWidth
+    
         var offsetXFromBoard
         var offsetYFromBoard
         
@@ -49,24 +115,24 @@ function getNormalizedBoardPosition(event){
         }
         else if(event.path[0].localName == "piece" && event.path[0].style.position == "fixed" ){
             if (!board.classList.contains("rotated")){
-                offsetXFromBoard = event.path[0].offsetLeft - board.offsetLeft + event.path[0].clientWidth/2
-                offsetYFromBoard = event.path[0].offsetTop - board.offsetTop + event.path[0].clientHeight/2
+                offsetXFromBoard = event.path[0].offsetLeft - board.offsetLeft + window.scrollX + event.path[0].clientWidth/2
+                offsetYFromBoard = event.path[0].offsetTop - board.offsetTop + window.scrollY + event.path[0].clientHeight/2
             }     
             else if(board.classList.contains("rotated")){
-                offsetXFromBoard =  event.path[0].offsetLeft - board.offsetLeft + event.path[0].clientWidth/2
-                offsetYFromBoard = event.path[0].offsetTop - 7*height/8 - board.offsetTop + event.path[0].clientHeight/2
+                offsetXFromBoard = event.offsetX + event.path[0].offsetLeft
+                offsetYFromBoard = event.offsetY + event.path[0].offsetTop  
             } 
         }
-        else {
+        else{
             offsetXFromBoard = event.offsetX + event.path[0].offsetLeft
-            offsetYFromBoard = event.offsetY + event.path[0].offsetTop         
+            offsetYFromBoard = event.offsetY + event.path[0].offsetTop 
         }
-        
-        var normalizedX = Math.trunc((offsetXFromBoard*8)/width)
-        var normalizedY = Math.trunc((offsetYFromBoard*8)/height)
-        return {normalizedX,normalizedY}
+    
+        normalizedX = Math.trunc((offsetXFromBoard*8)/width)
+        normalizedY = Math.trunc((offsetYFromBoard*8)/height)
     }
-    return {undefined,undefined}
+
+    return {normalizedX,normalizedY}
 }
 
 function getNormalizedVectorTranslation(initialVector,finalVector){
@@ -91,6 +157,16 @@ function setElementOfBoardWithClassName(board,elementName,className){
     return element
 }
 
+function setElementOfBoardWithClassNames(board,elementName,classNames){
+    element = document.createElement(elementName)
+    element.classList.add(...classNames)
+    board.appendChild(element)
+    if(elementName == "piece"){
+        handlerMovePiece(element,board)
+    }
+    return element
+}
+
 function getPieceFromBoard(board,position){
     return getElementOfBoardFromClassName(board,"piece",position)
 }
@@ -107,39 +183,10 @@ function setSquareOnBoard(board,position){
     return setElementOfBoardWithClassName(board,"square",position)
 }
 
-function animateBoard(board,duration,initial_position,final_position) {
-    var pieceInitialPosition = getPieceFromBoard(board,initial_position)
-    if (pieceInitialPosition !== undefined){
-        var pieceFinalPosition = getPieceFromBoard(board,final_position)
-    
-        if (pieceFinalPosition === undefined){
-            pieceFinalPosition = setPieceOnBoard(board,final_position)
-        }
-
-        var NormalizedVectorTranslation = getNormalizedVectorTranslation({
-            initialPositionX : pieceInitialPosition.offsetLeft,
-            initialPositionY : pieceInitialPosition.offsetTop
-        },{
-            finalPositionX : pieceFinalPosition.offsetLeft,
-            finalPositionY : pieceFinalPosition.offsetTop
-        })
-        pieceInitialPosition.style.transition = "transform " + duration +"ms ease" 
-        pieceInitialPosition.style.transform = "translate(" + NormalizedVectorTranslation.x + "px," + NormalizedVectorTranslation.y + "px)"
-
-        setTimeout(() => {
-            pieceInitialPosition.remove()
-            pieceFinalPosition.classList = pieceInitialPosition.classList
-            pieceFinalPosition.classList.remove(initial_position)
-            pieceFinalPosition.classList.add(final_position)
-        }, duration)
-        return
-    }
-}
-
 function colorSquare(e){
     const board = e.path.find(element => element.classList.contains("board"))
     
-    var position = getClassNamePosition(getNormalizedBoardPosition(e))
+    var position = getClassNamePosition(getNormalizedSquarePosition(e))
     var coloredSquare = getSquareFromBoard(board,position)
     if (coloredSquare === undefined){
         coloredSquare = setSquareOnBoard(board,position)

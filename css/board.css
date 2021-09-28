@@ -347,6 +347,7 @@
     background-repeat: no-repeat;
     background-position: center;
     color: white;
+    z-index: 1;
 }
 
 .whiteKnight {
@@ -354,6 +355,7 @@
     background-repeat: no-repeat;
     background-position: center;
     color: white;
+    z-index: 1;
 }
 
 .whiteRook {
@@ -361,6 +363,7 @@
     background-repeat: no-repeat;
     background-position: center;
     color: white;
+    z-index: 1;
 }
 
 
@@ -369,6 +372,7 @@
     background-repeat: no-repeat;
     background-position: center;
     color: white;
+    z-index: 1;
 }
 
 .whiteQueen {
@@ -376,6 +380,7 @@
     background-repeat: no-repeat;
     background-position: center;
     color: white;
+    z-index: 1;
 }
 
 .blackPawn {
@@ -383,6 +388,7 @@
     background-repeat: no-repeat;
     background-position: center;
     color: black;
+    z-index: 1;
 }
 
 .blackBishop {
@@ -390,6 +396,7 @@
     background-repeat: no-repeat;
     background-position: center;
     color: black;
+    z-index: 1;
 }
 
 .blackKnight {
@@ -397,6 +404,7 @@
     background-repeat: no-repeat;
     background-position: center;
     color: black;
+    z-index: 1;
 }
 
 .blackRook {
@@ -404,6 +412,7 @@
     background-repeat: no-repeat;
     background-position: center;
     color: black;
+    z-index: 1;
 }
 
 
@@ -412,6 +421,7 @@
     background-repeat: no-repeat;
     background-position: center;
     color: black;
+    z-index: 1;
 }
 
 .blackQueen {
@@ -419,6 +429,7 @@
     background-repeat: no-repeat;
     background-position: center;
     color: black;
+    z-index: 1;
 }
 
 .redBackground {
