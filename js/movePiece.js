@@ -176,6 +176,11 @@ function handlerMovePiece(piece,board){
                                 classNameFinalPosition = classNameInitialPosition
                             }
                            
+                            var currentPieceHovered = getPieceFromBoard(board,classNameFinalPosition)
+                            if(currentPieceHovered !== undefined){
+                                currentPieceHovered.remove()
+                            }
+
                             piece.style.position = ""
                             piece.style.left = ""
                             piece.style.top = ""
@@ -190,7 +195,7 @@ function handlerMovePiece(piece,board){
                             if(currentSquareOvered !== undefined) {
                                 currentSquareOvered.remove()
                             }
-                            
+
                             board.removeAttribute("boardParent")
                             document.removeEventListener("mousemove",movePiece)
                             piece.removeEventListener("mouseup", replacePiece)
