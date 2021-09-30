@@ -1,11 +1,14 @@
 // uci protocol: http://wbec-ridderkerk.nl/html/UCIProtocol.html
 function switchBoardOrientation(board){
     board.classList.toggle('rotated')
+    Array.prototype.slice.call(board.children).forEach(element => element.localName == "piece" && element.classList.toggle('rotated'))
 }
 
 function setPositionOnBoard(fenstring,board){
     const fieldArray = fenstring.split(' ')
     const rows = fieldArray[0].split('/')
+    const boardChildren = Array.prototype.slice.call(board.children)
+    boardChildren.forEach(element => element.remove())
     var rowCount = 8
     rows.forEach(row => {
         for (let index = 0; index < row.length; index++) {
@@ -48,6 +51,90 @@ function setPositionOnBoard(fenstring,board){
         --rowCount
     });
     
+}
+
+function getFENFromBoard(board){
+    var fenList = ""
+    var count_emptySquare = 0
+    const boardChildren = Array.prototype.slice.call(board.children)
+
+    for (let row = 8; row > 0; row--) {        
+        for (let column = 'a'; column < 'i'; column=String.fromCharCode(column.charCodeAt(0)+1)) {
+            var piece = boardChildren.find(piece => piece.localName == "piece" && piece.classList.contains(column+row))
+            if(piece !== undefined){
+                if(count_emptySquare != 0){
+                    fenList = fenList + count_emptySquare
+                    count_emptySquare = 0
+                }
+                var pieceValue = ""
+                if(piece.classList.value.includes("Pawn")){
+                    pieceValue = "p"
+                }
+                else if(piece.classList.value.includes("Rook")){
+                    pieceValue = "r"
+                }
+                else if(piece.classList.value.includes("Knight")){
+                    pieceValue = "n"
+                }
+                else if(piece.classList.value.includes("Bishop")){
+                    pieceValue = "b"
+                }
+                else if(piece.classList.value.includes("Queen")){
+                    pieceValue = "q"
+                }
+                else if(piece.classList.value.includes("King")){
+                    pieceValue = "k"
+                }
+
+                if(piece.classList.value.includes("white")){
+                    pieceValue = pieceValue.toUpperCase()
+                }
+                
+                fenList = fenList + pieceValue
+            }
+            else if(piece === undefined) {
+                count_emptySquare++
+            }
+        }
+        if (count_emptySquare != 0){
+            fenList = fenList + count_emptySquare
+        }
+        count_emptySquare = 0
+        fenList = fenList + "/"
+    }
+    fenList = fenList.slice(0,fenList.length-1)
+    fenList = fenList + " " + getPlayerToPlay()
+    fenList = fenList + " " + getWhiteRockAllowed()
+    fenList = fenList + getBlackRockAllowed()
+    fenList = fenList + " " + getEnPassantSquare()
+    fenList = fenList + " " + getHalfMoveCountSinceLastCaptureOrPawnMove()
+    fenList = fenList + " " + getMoveCount()
+    alert("FEN = " + fenList)
+}
+
+function getMoveCount(){
+    return "1"
+}
+
+function getHalfMoveCountSinceLastCaptureOrPawnMove(){
+    //50 moves rule
+    return "0"
+}
+
+function getEnPassantSquare(){
+    return "-"
+}
+
+function getBlackRockAllowed(){
+    return "kq"
+}
+
+function getWhiteRockAllowed(){
+    return "KQ"
+}
+
+function getPlayerToPlay(){
+    return "w"
 }
 
 function isOutsideBoard(classNamePosition){

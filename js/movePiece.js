@@ -1,4 +1,3 @@
-
 $(function() {
     $("#movePiece").click(function(){
         const board = document.querySelector("#thisBoard")
@@ -7,6 +6,13 @@ $(function() {
     $("#addPawn").click(function(){
         const board = document.querySelector("#thisBoard")
         setPositionOnBoard("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",board)
+        if (board.classList.contains('rotated')){
+            Array.prototype.slice.call(board.children).forEach(element => element.localName == "piece" && element.classList.toggle('rotated'))
+        }
+    })
+    $("#getFen").click(function(){
+        const board = document.querySelector("#thisBoard")
+        getFENFromBoard(board)
     })
 })
 
@@ -48,7 +54,7 @@ function handlerMovePiece(piece,board){
                     console.log('mouse down')
                     aPieceIsSelected = true
                     board.setAttribute("boardParent",true)
-                    
+                    piece.setAttribute("currentPieceSelected",true)
                     //remove highlighted square
                     var allSquareElement = Array.prototype.filter.call(board.children, child => child.localName == "square")
                     allSquareElement.forEach(square => square.remove())
@@ -177,7 +183,7 @@ function handlerMovePiece(piece,board){
                             }
                            
                             var currentPieceHovered = getPieceFromBoard(board,classNameFinalPosition)
-                            if(currentPieceHovered !== undefined){
+                            if(currentPieceHovered !== undefined && !currentPieceHovered.getAttribute("currentPieceSelected")){
                                 currentPieceHovered.remove()
                             }
 
@@ -197,6 +203,7 @@ function handlerMovePiece(piece,board){
                             }
 
                             board.removeAttribute("boardParent")
+                            piece.removeAttribute("currentPieceSelected")
                             document.removeEventListener("mousemove",movePiece)
                             piece.removeEventListener("mouseup", replacePiece)
                             aPieceIsSelected = false
