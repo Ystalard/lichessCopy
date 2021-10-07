@@ -33,7 +33,11 @@
                 <div class="mainDisplayer">
                     <button class="button" id="movePiece">Move a piece</button>
                     <button class="button" onclick="switchBoardOrientation(thisBoard)">Rotate</button>
-                    <button class="button" id="addPawn">add a piece</button>
+                    <div class="buttonLike">
+                        <span>FEN setup</span>
+                        <button class="button" id="addPawn">set position</button>
+                        <input id="fenValue" type="text" maxlength="84" size="84">
+                    </div>
                     <button class="button" id="getFen">get FEN</button>
                     <div class="board" id="thisBoard" >
                         <piece class="whitePawn a1" ondragstart="return false;" ondrop="return false;"></piece>

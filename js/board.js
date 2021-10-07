@@ -192,31 +192,16 @@ function getNormalizedSquarePosition(event){
     if(board !== undefined){
         const height = board.clientHeight
         const width =  board.clientWidth
-    
-        var offsetXFromBoard
-        var offsetYFromBoard
-        
-        if (event.path[0].classList.contains("board")){
-            offsetXFromBoard = event.offsetX
-            offsetYFromBoard = event.offsetY
+        var rect = board.getBoundingClientRect()
+        var x = event.clientX - rect.x
+        var y = event.clientY - rect.y
+
+        normalizedX = Math.trunc((x*8)/width)
+        normalizedY = Math.trunc((y*8)/height)
+        if(board.classList.contains("rotated")){
+            normalizedX = 7 - normalizedX
+            normalizedY = 7 - normalizedY
         }
-        else if(event.path[0].localName == "piece" && event.path[0].style.position == "fixed" ){
-            if (!board.classList.contains("rotated")){
-                offsetXFromBoard = event.path[0].offsetLeft - board.offsetLeft + window.scrollX + event.path[0].clientWidth/2
-                offsetYFromBoard = event.path[0].offsetTop - board.offsetTop + window.scrollY + event.path[0].clientHeight/2
-            }     
-            else if(board.classList.contains("rotated")){
-                offsetXFromBoard = event.offsetX + event.path[0].offsetLeft
-                offsetYFromBoard = event.offsetY + event.path[0].offsetTop  
-            } 
-        }
-        else{
-            offsetXFromBoard = event.offsetX + event.path[0].offsetLeft
-            offsetYFromBoard = event.offsetY + event.path[0].offsetTop 
-        }
-    
-        normalizedX = Math.trunc((offsetXFromBoard*8)/width)
-        normalizedY = Math.trunc((offsetYFromBoard*8)/height)
     }
 
     return {normalizedX,normalizedY}

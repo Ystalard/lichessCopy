@@ -5,9 +5,17 @@ $(function() {
     }) 
     $("#addPawn").click(function(){
         const board = document.querySelector("#thisBoard")
-        setPositionOnBoard("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",board)
-        if (board.classList.contains('rotated')){
-            Array.prototype.slice.call(board.children).forEach(element => element.localName == "piece" && element.classList.toggle('rotated'))
+        const regex = new RegExp('^(([pnbrqkPNBRQK1-8]{1,8}){1}|([pnbrqkPNBRQK1-8]{1,8}\/){7}([pnbrqkPNBRQK1-8]{1,8}){1})\\s+(b|w)\\s+(-|K?Q?k?q?)\\s+(-|[a-h][3|6])\\s+(\\d+)\\s+(\\d+)\\s*$')
+        //rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1
+        const value = $("#fenValue")[0].value
+        if (regex.test(value)) {
+            setPositionOnBoard($("#fenValue")[0].value,board)
+            if (board.classList.contains('rotated')){
+                Array.prototype.slice.call(board.children).forEach(element => element.localName == "piece" && element.classList.toggle('rotated'))
+            }
+        }
+        else{
+            alert("FEN is not valid")
         }
     })
     $("#getFen").click(function(){
