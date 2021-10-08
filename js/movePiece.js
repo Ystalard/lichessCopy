@@ -55,17 +55,39 @@ function animateBoard(board,duration,initial_position,final_position) {
 }
 
 function handlerMovePiece(piece,board){
+    function removeHilightedSquare(board){
+        var allSquareElement = Array.prototype.filter.call(board.children, child => child.localName == "square")
+        allSquareElement.forEach(square => square.remove())
+    }
+    function handleClick(click){
+        console.log("clicked")
+        colorSquare(click,"softBlue")
+        const clientX = click.clientX
+        const clientY = click.clientY
+        const elementsUnderCursor = document.elementsFromPoint(clientX,clientY)
+        var piece = elementsUnderCursor.find(element => element.localName !== undefined && element.localName === "piece")
+        var board = elementsUnderCursor.find(element => element.classList != undefined && element.classList.contains("board"))
+        if(board !== undefined) {
+            Array.prototype.forEach.call(board.children,element => element.localName === "piece" ? element.removeAttribute("currentPieceSelected"):undefined)
+        }
+
+        piece.setAttribute("currentPieceSelected",true)
+        var allBoards = document.querySelectorAll(".board")
+        allBoards.forEach(currentBoard => currentBoard.removeAttribute("boardParent"))
+        board.setAttribute("boardParent",true)
+    }
+    piece.addEventListener("click", handleClick),
     piece.addEventListener("mousedown", e=> {
         switch (e.which){
             case 1: //leftclick
                 if (!aPieceIsSelected) {
                     console.log('mouse down')
+                    piece.addEventListener("click",handleClick)
                     aPieceIsSelected = true
                     board.setAttribute("boardParent",true)
                     piece.setAttribute("currentPieceSelected",true)
-                    //remove highlighted square
-                    var allSquareElement = Array.prototype.filter.call(board.children, child => child.localName == "square")
-                    allSquareElement.forEach(square => square.remove())
+                    
+                    removeHilightedSquare(board)
                     
                     //shift between position of the mouse and uper left corner of the piece
                     const shiftX = e.clientX - piece.getBoundingClientRect().left;
@@ -76,8 +98,8 @@ function handlerMovePiece(piece,board){
                     var classNameInitialPosition = getClassNamePosition(getNormalizedSquarePosition(e))
                     var translateX = 0
                     var translateY = 0
-                    var clientX = e.clientX
-                    var clientY = e.clientY     
+                    const clientX_initial = e.clientX
+                    const clientY_initial = e.clientY     
                     piece.style.position = "fixed"
                     piece.style.zIndex = 1000
 
@@ -86,14 +108,14 @@ function handlerMovePiece(piece,board){
                         translateX = (classNameInitialPosition.charAt(0).charCodeAt(0) - 97)*width;
                         translateY = (classNameInitialPosition.charAt(1) - 1)*height;
 
-                        piece.style.left = board.getBoundingClientRect().left + board.clientWidth - clientX - (-shiftX + width) - translateX + "px"
-                        piece.style.top = -(clientY - board.getBoundingClientRect().top - shiftY) + translateY + "px"
+                        piece.style.left = board.getBoundingClientRect().left + board.clientWidth - clientX_initial - (-shiftX + width) - translateX + "px"
+                        piece.style.top = -(clientY_initial - board.getBoundingClientRect().top - shiftY) + translateY + "px"
                         piece.style.height = height + "px"
                         piece.style.width = width + "px"
                     }
                     else{
-                        piece.style.left = clientX - shiftX + "px"
-                        piece.style.top = clientY - shiftY + "px"
+                        piece.style.left = clientX_initial - shiftX + "px"
+                        piece.style.top = clientY_initial - shiftY + "px"
                         piece.style.height = height + "px"
                         piece.style.width = width + "px"
                     }
@@ -105,8 +127,8 @@ function handlerMovePiece(piece,board){
                         if(aPieceIsSelected){
                             console.log('moving')
                             piece.style.position = "fixed"
-                            clientX = e.clientX
-                            clientY = e.clientY
+                            var clientX = e.clientX
+                            var clientY = e.clientY
                             if(board.classList.contains("rotated")){
                                 piece.style.left = board.getBoundingClientRect().left + board.clientWidth - clientX - (-shiftX + width) - translateX + "px"
                                 piece.style.top = -(clientY - board.getBoundingClientRect().top - shiftY) + translateY + "px"
@@ -133,8 +155,7 @@ function handlerMovePiece(piece,board){
                                     currentSquareOvered = setSquareOnBoard(board,currentClassNameSquare)
                                 }
                                 
-                                currentSquareOvered.style.opacity = "0.2"
-                                currentSquareOvered.style.backgroundColor = "blue"
+                                currentSquareOvered.classList.add("softBlue")
                                 
                                 if (previousSquareOvered !== undefined && previousSquareOvered != currentSquareOvered){
                                     previousSquareOvered.remove()
@@ -150,14 +171,31 @@ function handlerMovePiece(piece,board){
                     function replacePiece(e){
                         if(aPieceIsSelected){
                             console.log("mouseup")
-                            clientX = e.clientX
-                            clientY = e.clientY
+                            if(clientX_initial != e.clientX || clientY_initial != e.clientY){
+                                piece.removeEventListener("click",handleClick)
+                            }
+                            const clientX_final = e.clientX
+                            const clientY_final = e.clientY
                             var classNameFinalPosition
                             classNameFinalPosition = getClassNamePosition(getNormalizedSquarePosition(e))
-                            var boardHovered = document.elementsFromPoint(clientX, clientY).find(element => element.classList !== undefined && element.classList.contains("board"))
+                            var boardHovered = document.elementsFromPoint(clientX_final, clientY_final).find(element => element.classList !== undefined && element.classList.contains("board"))
 
-                            if(isOutsideBoard(classNameFinalPosition) || !(boardHovered !== undefined && boardHovered.getAttribute("boardParent"))) {
+                            if(isOutsideBoard(classNameFinalPosition) || !(boardHovered !== undefined && boardHovered.getAttribute("boardParent")) || !islegalMove(board,classNameInitialPosition,classNameFinalPosition)) {
+                                var illegalSquareSelected = getSquareFromBoard(board,classNameFinalPosition)
                                 classNameFinalPosition = classNameInitialPosition
+                                var initialSquareSelected = getSquareFromBoard(board,classNameInitialPosition)
+
+                                if(illegalSquareSelected !== undefined && illegalSquareSelected != initialSquareSelected){
+                                    illegalSquareSelected.remove()
+                                }                                
+
+                                if(initialSquareSelected === undefined){
+                                    initialSquareSelected = setSquareOnBoard(board,classNameInitialPosition)
+                                }
+
+                                if(!initialSquareSelected.classList.contains("softBlue")){
+                                    initialSquareSelected.classList.add("softBlue")
+                                }
                             }
                            
                             var currentPieceHovered = getPieceFromBoard(board,classNameFinalPosition)
@@ -174,12 +212,7 @@ function handlerMovePiece(piece,board){
                             piece.classList.remove(classNameInitialPosition)
                             piece.classList.add(classNameFinalPosition)
                             piece.style.zIndex = 1
-
-                            currentSquareOvered = getSquareFromBoard(board,classNameFinalPosition)
-                            if(currentSquareOvered !== undefined) {
-                                currentSquareOvered.remove()
-                            }
-
+                            
                             board.removeAttribute("boardParent")
                             piece.removeAttribute("currentPieceSelected")
                             document.removeEventListener("mousemove",movePiece)

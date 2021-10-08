@@ -442,6 +442,11 @@
     opacity: .5;
 }
 
+.softBlue{
+    opacity: .2;
+    background-color: blue;
+}
+
 .greenBackground {
     background-color: green;
     opacity: .5;

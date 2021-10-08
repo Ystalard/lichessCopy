@@ -4,6 +4,10 @@ function switchBoardOrientation(board){
     Array.prototype.slice.call(board.children).forEach(element => element.localName == "piece" && element.classList.toggle('rotated'))
 }
 
+function islegalMove(board,classNameInitialPosition,classNameFinalPosition){
+    return true
+}
+
 function setPositionOnBoard(fenstring,board){
     const fieldArray = fenstring.split(' ')
     const rows = fieldArray[0].split('/')
@@ -257,7 +261,7 @@ function setSquareOnBoard(board,position){
     return setElementOfBoardWithClassName(board,"square",position)
 }
 
-function colorSquare(e){
+function colorSquare(e,color){
     const board = e.path.find(element => element.classList.contains("board"))
     
     var position = getClassNamePosition(getNormalizedSquarePosition(e))
@@ -266,20 +270,27 @@ function colorSquare(e){
         coloredSquare = setSquareOnBoard(board,position)
     }      
     
-    if (e.altKey && e.ctrlKey){
-        coloredSquare.classList.toggle("yellowBackground")
-        coloredSquare.classList.remove("blueBackground","redBackground","greenBackground")
+    if(color !== undefined){
+        coloredSquare.classList.toggle(color)
+        coloredSquare.classList.remove("blueBackground","redBackground","greenBackground","yellowBackground")
     }
-    else if (e.altKey){
-        coloredSquare.classList.toggle("blueBackground")
-        coloredSquare.classList.remove("yellowBackground","redBackground","greenBackground")
+    else{
+        if (e.altKey && e.ctrlKey){
+            coloredSquare.classList.toggle("yellowBackground")
+            coloredSquare.classList.remove("blueBackground","redBackground","greenBackground")
+        }
+        else if (e.altKey){
+            coloredSquare.classList.toggle("blueBackground")
+            coloredSquare.classList.remove("yellowBackground","redBackground","greenBackground")
+        }
+        else if (e.ctrlKey){
+            coloredSquare.classList.toggle("redBackground")
+            coloredSquare.classList.remove("blueBackground","yellowBackground","greenBackground")
+        }
+        else {
+            coloredSquare.classList.toggle("greenBackground")
+            coloredSquare.classList.remove("blueBackground","redBackground","yellowBackground")
+        }
     }
-    else if (e.ctrlKey){
-        coloredSquare.classList.toggle("redBackground")
-        coloredSquare.classList.remove("blueBackground","yellowBackground","greenBackground")
-    }
-    else {
-        coloredSquare.classList.toggle("greenBackground")
-        coloredSquare.classList.remove("blueBackground","redBackground","yellowBackground")
-    }
+    
 }
