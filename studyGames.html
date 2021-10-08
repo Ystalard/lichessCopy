@@ -30,21 +30,23 @@
 
                     </div>
                 </div>
-                <div class="mainDisplayer">
+                <div class="button-content">
                     <button class="button" id="movePiece">Move a piece</button>
                     <button class="button" onclick="switchBoardOrientation(thisBoard)">Rotate</button>
                     <div class="buttonLike">
                         <span>FEN setup</span>
                         <button class="button" id="addPawn">set position</button>
-                        <input id="fenValue" type="text" maxlength="84" size="84">
+                        <input id="fenValue" type="text" maxlength="84">
                     </div>
                     <button class="button" id="getFen">get FEN</button>
+                </div>
+                <div class="main-content">
                     <div class="board" id="thisBoard" >
                         <piece class="whitePawn a1" ondragstart="return false;" ondrop="return false;"></piece>
                     </div>
                 </div>
                 <div class="analysis">
-    
+
                 </div>
                 <div class="notes">
 

@@ -76,57 +76,24 @@ function handlerMovePiece(piece,board){
                     var classNameInitialPosition = getClassNamePosition(getNormalizedSquarePosition(e))
                     var translateX = 0
                     var translateY = 0
-                                   
+                    var clientX = e.clientX
+                    var clientY = e.clientY     
                     piece.style.position = "fixed"
                     piece.style.zIndex = 1000
 
                     if(board.classList.contains("rotated")){
                         // correct position coord when board is rotated as left and top depends on last transformed elements instead of viewport
-                        switch(classNameInitialPosition.charAt(0)){
-                            case "a": translateX = 0*37
-                            break;
-                            case "b": translateX = 1*37
-                            break;
-                            case "c": translateX = 2*37
-                            break;
-                            case "d": translateX = 3*37
-                            break;
-                            case "e": translateX = 4*37
-                            break;
-                            case "f": translateX = 5*37
-                            break;
-                            case "g": translateX = 6*37
-                            break;
-                            case "h": translateX = 7*37
-                            break;
-                        }
-                        switch(classNameInitialPosition.charAt(1)){
-                            case "1": translateY = 0*37
-                            break;
-                            case "2": translateY = 1*37
-                            break;
-                            case "3": translateY = 2*37
-                            break;
-                            case "4": translateY = 3*37
-                            break;
-                            case "5": translateY = 4*37
-                            break;
-                            case "6": translateY = 5*37
-                            break;
-                            case "7": translateY = 6*37
-                            break;
-                            case "8": translateY = 7*37
-                            break;
-                        }
+                        translateX = (classNameInitialPosition.charAt(0).charCodeAt(0) - 97)*width;
+                        translateY = (classNameInitialPosition.charAt(1) - 1)*height;
 
-                        piece.style.left = board.getBoundingClientRect().left + board.clientWidth - e.clientX - (-shiftX + width) - translateX + "px"
-                        piece.style.top = -(e.clientY - board.getBoundingClientRect().top - shiftY) + translateY + "px"
+                        piece.style.left = board.getBoundingClientRect().left + board.clientWidth - clientX - (-shiftX + width) - translateX + "px"
+                        piece.style.top = -(clientY - board.getBoundingClientRect().top - shiftY) + translateY + "px"
                         piece.style.height = height + "px"
                         piece.style.width = width + "px"
                     }
                     else{
-                        piece.style.left = e.clientX - shiftX + "px"
-                        piece.style.top = e.clientY - shiftY + "px"
+                        piece.style.left = clientX - shiftX + "px"
+                        piece.style.top = clientY - shiftY + "px"
                         piece.style.height = height + "px"
                         piece.style.width = width + "px"
                     }
@@ -138,14 +105,15 @@ function handlerMovePiece(piece,board){
                         if(aPieceIsSelected){
                             console.log('moving')
                             piece.style.position = "fixed"
-
+                            clientX = e.clientX
+                            clientY = e.clientY
                             if(board.classList.contains("rotated")){
-                                piece.style.left = board.getBoundingClientRect().left + board.clientWidth - e.clientX - (-shiftX + width) - translateX + "px"
-                                piece.style.top = -(e.clientY - board.getBoundingClientRect().top - shiftY) + translateY + "px"
+                                piece.style.left = board.getBoundingClientRect().left + board.clientWidth - clientX - (-shiftX + width) - translateX + "px"
+                                piece.style.top = -(clientY - board.getBoundingClientRect().top - shiftY) + translateY + "px"
                             }
                             else{
-                                piece.style.left = e.clientX - shiftX + "px"
-                                piece.style.top = e.clientY - shiftY + "px"
+                                piece.style.left = clientX - shiftX + "px"
+                                piece.style.top = clientY - shiftY + "px"
                             }
 
                             piece.style.height = height + "px"
@@ -156,7 +124,7 @@ function handlerMovePiece(piece,board){
                             
                             var outsideBoard = isOutsideBoard(currentClassNameSquare)
                             
-                            var boardHovered = document.elementsFromPoint(e.clientX, e.clientY).find(element => element.classList !== undefined && element.classList.contains("board"))
+                            var boardHovered = document.elementsFromPoint(clientX, clientY).find(element => element.classList !== undefined && element.classList.contains("board"))
 
                             if(!outsideBoard && (boardHovered !== undefined && boardHovered.getAttribute("boardParent"))){
                                 currentSquareOvered = getSquareFromBoard(board,currentClassNameSquare)
@@ -182,9 +150,11 @@ function handlerMovePiece(piece,board){
                     function replacePiece(e){
                         if(aPieceIsSelected){
                             console.log("mouseup")
+                            clientX = e.clientX
+                            clientY = e.clientY
                             var classNameFinalPosition
                             classNameFinalPosition = getClassNamePosition(getNormalizedSquarePosition(e))
-                            var boardHovered = document.elementsFromPoint(e.clientX, e.clientY).find(element => element.classList !== undefined && element.classList.contains("board"))
+                            var boardHovered = document.elementsFromPoint(clientX, clientY).find(element => element.classList !== undefined && element.classList.contains("board"))
 
                             if(isOutsideBoard(classNameFinalPosition) || !(boardHovered !== undefined && boardHovered.getAttribute("boardParent"))) {
                                 classNameFinalPosition = classNameInitialPosition

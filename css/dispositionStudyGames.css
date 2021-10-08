@@ -13,12 +13,17 @@ html,main,body{
     background-color:darkgreen;
 }
 
-.mainDisplayer{
+.main-content{
     grid-area: main;
     background-color: black;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.button-content{
+    grid-area: button-content;
+    background-color: coral;
 }
 
 .analysis {
@@ -32,10 +37,29 @@ html,main,body{
     
 }
 
-.wrapper {
-    display:grid;
-    grid-template-areas:
-    "nav nav nav"
-    "sampleChess main analysis"
-    "sampleChess notes notes";
+.wrapper{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-areas: 
+    "main"
+    "button-content"
+    "analysis"
+    "sampleChess"
+    "notes";
+}
+
+#fenValue{
+    width:-webkit-fill-available;
+    max-width: 84ch;;
+}
+
+@media only screen and (min-width: 768px){
+    .wrapper {
+        display:grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-areas:
+        "nav nav nav"
+        "button-content main analysis"
+        "sampleChess notes notes";
+    }
 }

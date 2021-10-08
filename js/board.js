@@ -188,13 +188,15 @@ function getNormalizedSquarePosition(event){
     const board = event.path.find(element => element.classList !== undefined && element.classList.contains("board"))
     var normalizedX = undefined 
     var normalizedY = undefined
-    
+    var clientX = event.clientX
+    var clientY = event.clientY
+
     if(board !== undefined){
         const height = board.clientHeight
         const width =  board.clientWidth
         var rect = board.getBoundingClientRect()
-        var x = event.clientX - rect.x
-        var y = event.clientY - rect.y
+        var x = clientX - rect.x
+        var y = clientY - rect.y
 
         normalizedX = Math.trunc((x*8)/width)
         normalizedY = Math.trunc((y*8)/height)
