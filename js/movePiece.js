@@ -55,10 +55,6 @@ function animateBoard(board,duration,initial_position,final_position) {
 }
 
 function handlerMovePiece(piece,board){
-    function removeHilightedSquare(board){
-        var allSquareElement = Array.prototype.filter.call(board.children, child => child.localName == "square")
-        allSquareElement.forEach(square => square.remove())
-    }
     function handleClick(click){
         console.log("clicked")
         colorSquare(click,"softBlue")

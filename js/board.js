@@ -8,6 +8,11 @@ function islegalMove(board,classNameInitialPosition,classNameFinalPosition){
     return true
 }
 
+function removeHilightedSquare(board){
+    var allSquareElement = Array.prototype.filter.call(board.children, child => child.localName == "square")
+    allSquareElement.forEach(square => square.remove())
+}
+
 function setPositionOnBoard(fenstring,board){
     const fieldArray = fenstring.split(' ')
     const rows = fieldArray[0].split('/')
