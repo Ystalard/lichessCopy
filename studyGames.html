@@ -17,7 +17,6 @@
         <main>
             <div class="wrapper">
                 <div class="nav">
-
                 </div>
                 <div class="sampleFromYourGames">
                     <div class="smallBoard">
@@ -43,6 +42,24 @@
                 <div class="main-content">
                     <div class="board" id="thisBoard" >
                         <piece class="whitePawn a1" ondragstart="return false;" ondrop="return false;"></piece>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="-50 -100 200 200">
+                            <defs>
+                              <marker id='head' orient="auto"
+                                markerWidth='2' markerHeight='4'
+                                refX='0.1' refY='2'>
+                                <!-- triangle pointing right (+x) -->
+                                <path d='M0,0 V4 L2,2 Z' fill="black"/>
+                              </marker>
+                            </defs>
+                            
+                            <path
+                              id='arrow-line'
+                              marker-end='url(#head)'
+                              stroke-width='1'
+                              fill='none' stroke='black'  
+                              d='M0,0 Q45,-20 90,0'
+                              />
+                        </svg>
                     </div>
                 </div>
                 <div class="analysis">
