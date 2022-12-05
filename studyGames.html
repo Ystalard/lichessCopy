@@ -10,35 +10,60 @@
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script text="text/javascript" src="js/board.js"></script>
-        <script text="text/javascript" src="js/movePiece.js"></script>
         <script text="text/javascript" src="js/boardListeners.js"></script>
+        <script text="text/javascript" src="js/movePiece.js"></script>        
     </head>
     <body>
         <main>
             <div class="wrapper">
                 <div class="nav">
-
                 </div>
                 <div class="sampleFromYourGames">
                     <div class="smallBoard">
 
                     </div>
                     <div class="board">
-
+                        <piece class="blackPawn b2" ondragstart="return false;" ondrop="return false;"></piece>
                     </div>
                     <div class="smallBoard">
 
                     </div>
                 </div>
-                <div class="mainDisplayer">
+                <div class="button-content">
                     <button class="button" id="movePiece">Move a piece</button>
                     <button class="button" onclick="switchBoardOrientation(thisBoard)">Rotate</button>
+                    <div class="buttonLike">
+                        <span>FEN setup</span>
+                        <button class="button" id="addPawn">set position</button>
+                        <input id="fenValue" type="text" maxlength="84">
+                    </div>
+                    <button class="button" id="getFen">get FEN</button>
+                </div>
+                <div class="main-content">
                     <div class="board" id="thisBoard" >
-                        <piece class="whitePawn a1" id="test"></piece>
+                        <piece class="whitePawn a1" ondragstart="return false;" ondrop="return false;"></piece>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 296 296" style="position: absolute;" width="296" height="296">
+                            <defs>
+                              <marker id='head' orient="auto"
+                                markerWidth='2' markerHeight='4'
+                                refX='0.1' refY='2'>
+                                <!-- triangle pointing right (+x) -->
+                                <path d='M0,0 V4 L2,2 Z' fill="black"/>
+                              </marker>
+                            </defs>
+                            
+                            <path
+                              id='arrow-line'
+                              marker-end='url(#head)'
+                              stroke-width='5'
+                              fill='none' stroke='black'  
+                              d='M18.25,18.25 Q0,0 277.25,277.25'
+                              />
+                        </svg>
                     </div>
                 </div>
                 <div class="analysis">
-    
+
                 </div>
                 <div class="notes">
 
